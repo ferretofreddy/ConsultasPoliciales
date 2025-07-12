@@ -1,0 +1,47 @@
+# Dependencias y gestores de paquetes
+/node_modules
+/.pnpm-store
+
+# Archivos de build y compilación
+/dist
+/apps/client/dist
+/apps/server/dist
+
+# Logs y reportes
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+report.xml
+coverage/
+
+# Archivos de variables de entorno (¡MUY IMPORTANTE!)
+.env
+.env.*
+!.env.example
+
+# Archivos de Drizzle Kit (las migraciones se generan, no se suben)
+/apps/server/src/config/migrations
+
+# Archivos específicos del sistema operativo
+.DS_Store
+Thumbs.db
+ehthumbs.db
+
+# Archivos de configuración de editores de código
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Archivos temporales de caché de herramientas
+.npm
+.eslintcache
+.vite-node
+.cache
