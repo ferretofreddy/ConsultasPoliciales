@@ -1,6 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../../config/db';
-import { personas, tiposIdentificacion, NewPersona, Persona } from '@consultas/shared';
+// --- CORRECCIÓN AQUÍ: La ruta de importación ahora es directa al archivo schema ---
+import { personas, tiposIdentificacion, NewPersona, Persona } from '@consultas/shared/schema';
 
 export class PersonasRepository {
 
@@ -39,6 +40,7 @@ export class PersonasRepository {
   }
 
   public async findByIdentificacion(identificacion: string): Promise<Persona | undefined> {
+    // Usamos db.query, que es una forma más moderna y eficiente que provee Drizzle
     return await db.query.personas.findFirst({
       where: eq(personas.identificacion, identificacion),
     });

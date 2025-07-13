@@ -1,4 +1,5 @@
-import { NewPersona, Persona } from '@consultas/shared';
+// --- CORRECCIÓN AQUÍ: La ruta de importación ahora es directa al archivo schema ---
+import { NewPersona, Persona } from '@consultas/shared/schema';
 import { PersonasRepository } from './personas.repository';
 
 export class PersonasService {
