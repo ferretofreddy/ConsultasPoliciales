@@ -5,7 +5,7 @@
     "rootDir": "./src",
     "composite": true,
     "paths": {
-      "@consultas/shared/*": ["../../packages/shared/src/*"]
+      "@consultas/shared/*": ["../../packages/shared/dist/*"]
     }
   },
   "include": ["src/**/*.ts"],
