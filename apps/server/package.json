@@ -5,16 +5,17 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "dev": "pnpm --filter @consultas/shared build && tsx watch src/server.ts",
+    "dev": "tsx watch src/server.ts",
     "build": "tsup src/server.ts --format esm --dts",
     "start": "node dist/server.js",
-    "db:migrate": "drizzle-kit migrate",
+    "db:push": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "db:seed": "tsx src/seed.ts"
   },
   "dependencies": {
     "@consultas/shared": "workspace:*",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "drizzle-orm": "^0.31.2",
@@ -26,7 +27,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
+    "@types/bcryptjs": "^2.4.6",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
     "@types/express-session": "^1.18.0",
@@ -34,6 +35,7 @@
     "@types/passport": "^1.0.16",
     "@types/passport-local": "^1.0.38",
     "@types/pg": "^8.11.6",
+    "cross-env": "^7.0.3",
     "drizzle-kit": "^0.22.8",
     "tsup": "^8.1.0",
     "tsx": "^4.16.2",

@@ -1,28 +1,40 @@
-import { Route, Switch } from 'wouter';
-import { MainLayout } from './components/MainLayout';
-import { DashboardPage } from './pages/DashboardPage';
-// 1. Importamos la nueva página que hemos creado
-import { PersonasPage } from './pages/PersonasPage';
+    import { Route, Switch, Redirect } from 'wouter';
+    import { MainLayout } from './components/MainLayout';
+    import { DashboardPage } from './pages/DashboardPage';
+    import { PersonasPage } from './pages/PersonasPage';
+    import { LoginPage } from './pages/LoginPage';
+    import { useAuth } from './contexts/AuthContext';
 
-function App() {
-  return (
-    <MainLayout>
-      <Switch>
-        {/* Ruta para el Dashboard */}
-        <Route path="/" component={DashboardPage} />
+    // Componente para proteger rutas
+    const PrivateRoute = ({ component: Component, ...rest }: any) => {
+      const { isAuthenticated } = useAuth();
+      return isAuthenticated ? <Route {...rest} component={Component} /> : <Redirect to="/login" />;
+    };
 
-        {/* 2. Añadimos la nueva ruta para la gestión de personas */}
-        <Route path="/gestion/personas" component={PersonasPage} />
-        
-        {/* Ruta por defecto si no se encuentra ninguna */}
-        <Route>
-          <div className="text-center py-10">
-            <h1 className="text-4xl font-bold">404 - Página No Encontrada</h1>
-          </div>
-        </Route>
-      </Switch>
-    </MainLayout>
-  );
-}
+    function App() {
+      const { isAuthenticated, isLoading } = useAuth();
 
-export default App;
+      // Mientras se verifica la sesión, mostramos un loader
+      if (isLoading) {
+        return <div className="flex items-center justify-center h-screen">Cargando...</div>;
+      }
+
+      return (
+        <Switch>
+          <Route path="/login" component={LoginPage} />
+          
+          {/* Si el usuario no está autenticado, cualquier otra ruta lo redirige al login */}
+          {!isAuthenticated && <Redirect to="/login" />}
+
+          {/* Si está autenticado, muestra el layout principal con las rutas protegidas */}
+          <MainLayout>
+            <PrivateRoute path="/" component={DashboardPage} />
+            <PrivateRoute path="/gestion/personas" component={PersonasPage} />
+            {/* Aquí irán las demás rutas protegidas */}
+          </MainLayout>
+        </Switch>
+      );
+    }
+
+    export default App;
+    

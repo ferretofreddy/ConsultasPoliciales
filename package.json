@@ -10,7 +10,8 @@
     "dev:client": "pnpm --filter @consultas/client dev",
     "build": "pnpm --filter \"./apps/*\" build",
     "start": "pnpm --filter @consultas/server start",
-    "db:migrate": "pnpm --filter @consultas/server db:migrate",
+    "db:push": "pnpm --filter @consultas/server db:push",
+    "db:seed": "pnpm --filter @consultas/server db:seed",
     "db:studio": "pnpm --filter @consultas/server db:studio"
   },
   "keywords": [],
